@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 13/04/2020 12:27:04 AM by Hibernate Tools 5.4.7.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
+    <class dynamic-insert="false" dynamic-update="false" mutable="true" name="co.edu.campusucc.sd.modelo.Banco" optimistic-lock="version" polymorphism="implicit" schema="public" select-before-update="false" table="banco">
+        <id name="idBanco" type="string">
+            <column length="3" name="id_banco"/>
+            <generator class="assigned"/>
+        </id>
+        <many-to-one class="co.edu.campusucc.sd.modelo.Pais" embed-xml="true" fetch="select" insert="true" name="pais" not-found="exception" optimistic-lock="true" unique="false" update="true">
+            <column length="3" name="id_pais"/>
+        </many-to-one>
+        <property generated="never" lazy="false" name="nombre" optimistic-lock="true" type="string" unique="false">
+            <column length="50" name="nombre"/>
+        </property>
+        <property generated="never" lazy="false" name="sede" optimistic-lock="true" type="string" unique="false">
+            <column length="50" name="sede"/>
+        </property>
+        <property generated="never" lazy="false" name="numeroCuenta" optimistic-lock="true" type="string" unique="false">
+            <column length="50" name="numero_cuenta"/>
+        </property>
+        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="corresponsals" optimistic-lock="true" sort="unsorted" table="corresponsal">
+            <key on-delete="noaction">
+                <column length="3" name="id_banco"/>
+            </key>
+            <one-to-many class="co.edu.campusucc.sd.modelo.Corresponsal" embed-xml="true" not-found="exception"/>
+        </set>
+        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="referencias" optimistic-lock="true" sort="unsorted" table="referencia">
+            <key on-delete="noaction">
+                <column length="3" name="id_banco"/>
+            </key>
+            <one-to-many class="co.edu.campusucc.sd.modelo.Referencia" embed-xml="true" not-found="exception"/>
+        </set>
+    </class>
+</hibernate-mapping>
